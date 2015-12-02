@@ -4,12 +4,15 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.cfg.annotations.Nullability;
 
 @Entity
 @Table(name = "User")
@@ -22,15 +25,24 @@ public class User {
 	private Date creationTime;
 	private Date lastUpdate;
 
+	
 	@OneToMany
 	Set<UserNotes> notes = new HashSet<UserNotes>();
 
-	public Set<UserNotes> getSet() {
+	public Set<UserNotes> getNotes() {
 		return notes;
 	}
-
-	public void setSet(Set<UserNotes> set) {
-		this.notes = set;
+	public void setNotes(Set<UserNotes> notes) {
+		this.notes = notes;
+	}
+	public User(){
+		
+	}
+	public User(String password,String email,Date creationTime,Date lastUpdate){
+		this.password=password;
+		this.email=email;
+		this.creationTime = creationTime;
+		this.lastUpdate = lastUpdate;
 	}
 
 	public int getUserId() {
